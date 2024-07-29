@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -21,12 +22,12 @@ public class Author {
     @Column(name = "author_name")
     private String name;
 
-    @Column(name = "author_birthDate")
-    private int birthDate;
+    @Column(name = "author_birth_date")
+    private LocalDate birthDate;
 
     @Column(name = "author_country")
     private String country;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
-    private List<Book> books;
+    private List<Book> bookList;
 }

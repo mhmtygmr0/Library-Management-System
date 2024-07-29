@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -18,18 +19,25 @@ public class Book {
     @Column(name = "book_id", unique = true)
     private int id;
 
-    @Column(name = "book_name")
+    @Column(name = "book_name", unique = true)
     private String name;
 
-    @Column(name = "book_publicationYear")
-    private int publicationYear;
+    @Column(name = "book_publication_year")
+    private LocalDate publicationYear;
 
     @Column(name = "book_stock")
     private int stock;
 
+    @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
+    private List<BookBorrowing> bookBorrowingList;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_author_id", referencedColumnName = "author_id")
     private Author author;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_publisher_id", referencedColumnName = "publisher_id")
+    private Publisher publisher;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -38,11 +46,4 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private List<Category> categories;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_publisher_id", referencedColumnName = "publisher_id")
-    private Publisher publisher;
-
-    @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
-    private List<BookBorrowing> bookBorrowings;
 }
