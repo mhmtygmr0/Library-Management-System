@@ -19,7 +19,7 @@ public class Author {
     @Column(name = "author_id", unique = true)
     private int id;
 
-    @Column(name = "author_name")
+    @Column(name = "author_name", unique = true)
     private String name;
 
     @Column(name = "author_birth_date")
