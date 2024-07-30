@@ -1,5 +1,8 @@
 package dev.patika.library.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,17 +31,22 @@ public class Book {
     @Column(name = "book_stock")
     private int stock;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
     private List<BookBorrowing> bookBorrowingList;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_author_id", referencedColumnName = "author_id")
     private Author author;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_publisher_id", referencedColumnName = "publisher_id")
     private Publisher publisher;
 
+    @JsonBackReference
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "book_category",

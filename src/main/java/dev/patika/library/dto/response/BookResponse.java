@@ -1,5 +1,6 @@
 package dev.patika.library.dto.response;
 
+import dev.patika.library.entities.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,5 +17,5 @@ public class BookResponse {
     private int stock;
     private int authorId;
     private int publisherId;
-    private List<CategoryResponse> categories;
+    private List<Category> categories;
 }

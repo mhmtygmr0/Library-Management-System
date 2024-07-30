@@ -1,5 +1,6 @@
 package dev.patika.library.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +25,7 @@ public class Category {
     @Column(name = "category_description")
     private String description;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "categories")
     private List<Book> bookList;
 }

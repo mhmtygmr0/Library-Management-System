@@ -3,8 +3,10 @@ package dev.patika.library.business.abstracts;
 import dev.patika.library.entities.Category;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 public interface CategoryService {
-    Category get(int id);
+    Category get(Integer id);
 
     Page<Category> cursor(int page, int pageSize);
 
@@ -13,4 +15,6 @@ public interface CategoryService {
     Category update(Category category);
 
     boolean delete(int id);
+
+    List<Category> get(List<Integer> categoryId);
 }

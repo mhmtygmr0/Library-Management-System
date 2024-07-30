@@ -1,6 +1,8 @@
 package dev.patika.library.business.concretes;
 
 import dev.patika.library.business.abstracts.PublisherService;
+import dev.patika.library.core.exception.NotFoundException;
+import dev.patika.library.core.utilies.Msg;
 import dev.patika.library.dao.PublisherRepo;
 import dev.patika.library.entities.Publisher;
 import org.springframework.data.domain.Page;
@@ -18,7 +20,7 @@ public class PublisherManager implements PublisherService {
 
     @Override
     public Publisher get(int id) {
-        return this.publisherRepo.findById(id).orElseThrow();
+        return this.publisherRepo.findById(id).orElseThrow(() -> new NotFoundException(Msg.NOT_FOUND));
     }
 
     @Override

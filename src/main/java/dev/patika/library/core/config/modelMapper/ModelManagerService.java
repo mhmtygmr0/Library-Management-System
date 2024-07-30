@@ -25,31 +25,21 @@ public class ModelManagerService implements IModelMapperService {
         this.modelMapper = modelMapper;
     }
 
-    /**
-     * Provides a ModelMapper instance configured for request mappings.
-     * The matching strategy is set to STANDARD and ambiguity is ignored.
-     *
-     * @return a configured ModelMapper instance for request mappings
-     */
     @Override
     public ModelMapper forRequest() {
-        this.modelMapper.getConfiguration()
+        ModelMapper requestMapper = new ModelMapper();
+        requestMapper.getConfiguration()
                 .setAmbiguityIgnored(true)
                 .setMatchingStrategy(MatchingStrategies.STANDARD);
-        return this.modelMapper;
+        return requestMapper;
     }
 
-    /**
-     * Provides a ModelMapper instance configured for response mappings.
-     * The matching strategy is set to LOOSE and ambiguity is ignored.
-     *
-     * @return a configured ModelMapper instance for response mappings
-     */
     @Override
     public ModelMapper forResponse() {
-        this.modelMapper.getConfiguration()
+        ModelMapper responseMapper = new ModelMapper();
+        responseMapper.getConfiguration()
                 .setAmbiguityIgnored(true)
                 .setMatchingStrategy(MatchingStrategies.LOOSE);
-        return this.modelMapper;
+        return responseMapper;
     }
 }

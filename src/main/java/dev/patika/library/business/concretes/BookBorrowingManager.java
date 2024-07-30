@@ -1,6 +1,8 @@
 package dev.patika.library.business.concretes;
 
 import dev.patika.library.business.abstracts.BookBorrowingService;
+import dev.patika.library.core.exception.NotFoundException;
+import dev.patika.library.core.utilies.Msg;
 import dev.patika.library.dao.BookBorrowingRepo;
 import dev.patika.library.entities.BookBorrowing;
 import org.springframework.data.domain.Page;
@@ -19,7 +21,7 @@ public class BookBorrowingManager implements BookBorrowingService {
 
     @Override
     public BookBorrowing get(int id) {
-        return this.bookBorrowingRepo.findById(id).orElseThrow();
+        return this.bookBorrowingRepo.findById(id).orElseThrow(() -> new NotFoundException(Msg.NOT_FOUND));
     }
 
     @Override

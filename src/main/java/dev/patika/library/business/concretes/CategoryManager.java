@@ -1,12 +1,16 @@
 package dev.patika.library.business.concretes;
 
 import dev.patika.library.business.abstracts.CategoryService;
+import dev.patika.library.core.exception.NotFoundException;
+import dev.patika.library.core.utilies.Msg;
 import dev.patika.library.dao.CategoryRepo;
 import dev.patika.library.entities.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CategoryManager implements CategoryService {
@@ -18,8 +22,8 @@ public class CategoryManager implements CategoryService {
     }
 
     @Override
-    public Category get(int id) {
-        return this.categoryRepo.findById(id).orElseThrow();
+    public Category get(Integer id) {
+        return this.categoryRepo.findById(id).orElseThrow(() -> new NotFoundException(Msg.NOT_FOUND));
     }
 
     @Override
@@ -43,5 +47,10 @@ public class CategoryManager implements CategoryService {
         Category category = this.get(id);
         this.categoryRepo.delete(category);
         return true;
+    }
+
+    @Override
+    public List<Category> get(List<Integer> categoryId) {
+        return this.categoryRepo.findAllById(categoryId);
     }
 }

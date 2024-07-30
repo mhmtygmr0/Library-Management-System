@@ -1,4 +1,4 @@
-package dev.patika.library.dto.request;
+package dev.patika.library.dto.request.author;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

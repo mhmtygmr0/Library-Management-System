@@ -1,10 +1,12 @@
 package dev.patika.library.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -22,11 +24,12 @@ public class Publisher {
     private String name;
 
     @Column(name = "publisher_establishment_year")
-    private int establishmentYear;
+    private LocalDate establishmentYear;
 
     @Column(name = "publisher_address")
     private String address;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "publisher", cascade = CascadeType.REMOVE)
     private List<Book> bookList;
 }

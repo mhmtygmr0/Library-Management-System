@@ -1,6 +1,8 @@
 package dev.patika.library.business.concretes;
 
 import dev.patika.library.business.abstracts.BookService;
+import dev.patika.library.core.exception.NotFoundException;
+import dev.patika.library.core.utilies.Msg;
 import dev.patika.library.dao.BookRepo;
 import dev.patika.library.entities.Book;
 import org.springframework.data.domain.Page;
@@ -19,7 +21,7 @@ public class BookManager implements BookService {
 
     @Override
     public Book get(int id) {
-        return this.bookRepo.findById(id).orElseThrow();
+        return this.bookRepo.findById(id).orElseThrow(() -> new NotFoundException(Msg.NOT_FOUND));
     }
 
     @Override

@@ -1,10 +1,13 @@
 package dev.patika.library.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "book_borrowing")
@@ -25,11 +28,12 @@ public class BookBorrowing {
     private String borrowerEmail;
 
     @Column(name = "borrowing_date")
-    private int borrowingDate;
+    private LocalDate borrowingDate;
 
     @Column(name = "borrowing_return_date")
-    private int returnDate;
+    private LocalDate returnDate;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "borrowing_book_id", referencedColumnName = "book_id")
     private Book book;

@@ -1,6 +1,8 @@
 package dev.patika.library.business.concretes;
 
 import dev.patika.library.business.abstracts.AuthorService;
+import dev.patika.library.core.exception.NotFoundException;
+import dev.patika.library.core.utilies.Msg;
 import dev.patika.library.dao.AuthorRepo;
 import dev.patika.library.entities.Author;
 import org.springframework.data.domain.Page;
@@ -19,7 +21,7 @@ public class AuthorManager implements AuthorService {
 
     @Override
     public Author get(int id) {
-        return this.authorRepo.findById(id).orElseThrow();
+        return this.authorRepo.findById(id).orElseThrow(() -> new NotFoundException(Msg.NOT_FOUND));
     }
 
     @Override

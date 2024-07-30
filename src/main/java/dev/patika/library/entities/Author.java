@@ -1,5 +1,6 @@
 package dev.patika.library.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class Author {
     @Column(name = "author_country")
     private String country;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
     private List<Book> bookList;
 }
