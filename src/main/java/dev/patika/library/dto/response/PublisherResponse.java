@@ -13,5 +13,4 @@ public class PublisherResponse {
     private int id;
     private String name;
     private LocalDate establishmentYear;
-    private String address;
 }

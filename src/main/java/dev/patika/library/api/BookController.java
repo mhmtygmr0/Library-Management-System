@@ -93,6 +93,23 @@ public class BookController {
     @ResponseStatus(HttpStatus.OK)
     public ResultData<BookResponse> update(@Valid @RequestBody BookUpdateRequest bookUpdateRequest) {
         Book book = this.modelMapper.forRequest().map(bookUpdateRequest, Book.class);
+        List<Category> categories = this.categoryService.get(bookUpdateRequest.getCategoryId());
+        if (categories.isEmpty()) {
+            throw new NotFoundException(Msg.NOT_FOUND);
+        }
+        book.setCategories(categories);
+
+        Author author = this.authorService.get(bookUpdateRequest.getAuthorId());
+        if (author == null) {
+            throw new NotFoundException(Msg.NOT_FOUND);
+        }
+        book.setAuthor(author);
+
+        Publisher publisher = this.publisherService.get(bookUpdateRequest.getPublisherId());
+        if (publisher == null) {
+            throw new NotFoundException(Msg.NOT_FOUND);
+        }
+        book.setPublisher(publisher);
         this.bookService.update(book);
         return ResultHelper.success(this.modelMapper.forResponse().map(book, BookResponse.class));
     }
