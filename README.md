@@ -42,8 +42,8 @@
 
 | Method | URL                                         | Description                                             |
 |--------|---------------------------------------------|---------------------------------------------------------|
-| GET    | /v1/book-borrowings/{id}                    | Lists all books borrowed by users.                      |
-| GET    | /v1/book-borrowings?page={id}&pageSize={pageSizeId} | Lists books borrowed by users based on page id and page size. |
-| PUT    | /v1/book-borrowings                         | Updates the status of the specified borrowing transaction. |
-| POST   | /v1/book-borrowings                         | Requests the borrowing of a specific book by a user.    |
-| DELETE | /v1/book-borrowings/{id}                    | Cancels the borrowing transaction with the specified ID. |
+| GET    | /v1/borrowings/{id}                         | Lists all books borrowed by users.                      |
+| GET    | /v1/borrowings?page={id}&pageSize={pageSizeId} | Lists books borrowed by users based on page id and page size. |
+| PUT    | /v1/borrowings                              | Updates the status of the specified borrowing transaction. |
+| POST   | /v1/borrowings                              | Requests the borrowing of a specific book by a user.    |
+| DELETE | /v1/borrowings/{id}                         | Cancels the borrowing transaction with the specified ID. |
